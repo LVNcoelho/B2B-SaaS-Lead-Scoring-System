@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import Optional
 import time
+import hashlib
 from .utils import preprocess_lead
 from .model import predict_score
 
@@ -28,6 +29,8 @@ async def predict(lead: LeadInput):
     segment = "High Touch" if score > 0.7 else "Low Touch"
     
     latency = (time.time() - start_time) * 1000 # em ms
+    
+    id_unico = hashlib.md5(lead.nome_empresa.encode()).hexdigest()
 
     return {
         "lead_id": hash(lead.nome_empresa),
