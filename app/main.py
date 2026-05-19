@@ -32,8 +32,8 @@ async def predict(lead: LeadInput):
     
     id_unico = hashlib.md5(lead.nome_empresa.encode()).hexdigest()
 
-    return {
-        "lead_id": hash(lead.nome_empresa),
+     return {
+        "lead_id": id_unico,  # <--- Troque aqui de 'hash(...)' para 'id_unico'
         "score": round(score, 2),
         "segment": segment,
         "treatment_applied": "Median + Flag" if df_processed['is_missing_tamanho'].iloc[0] else "None",
