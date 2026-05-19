@@ -32,7 +32,7 @@ async def predict(lead: LeadInput):
     
     id_unico = hashlib.md5(lead.nome_empresa.encode()).hexdigest()
 
-     return {
+    return {
         "lead_id": id_unico,  # <--- Troque aqui de 'hash(...)' para 'id_unico'
         "score": round(score, 2),
         "segment": segment,
