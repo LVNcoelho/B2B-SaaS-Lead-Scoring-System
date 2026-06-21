@@ -4,8 +4,14 @@ from datetime import datetime
 from typing import Optional
 from fastapi import FastAPI, HTTPException, status
 from pydantic import BaseModel, Field
-from .utils import preprocess_lead
-from .model import predict_score
+
+# Ajuste das importações para rodar perfeitamente no servidor e no terminal
+try:
+    from app.utils import preprocess_lead
+    from app.model import predict_score
+except ImportError:
+    from utils import preprocess_lead
+    from model import predict_score
 
 app = FastAPI(title="B2B SaaS Lead Scoring")
 
